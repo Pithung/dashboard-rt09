@@ -30,10 +30,6 @@
         min-height: 68px; /* Tambahkan ini */
         max-height: 68px; /* Tambahkan ini */
     }
-    
-    .header-left h1 {
-        max-width: 300px; /* Perkecil batas lebar untuk layar HP agar tidak tabrakan dengan tombol tema */
-    }
 
     /* Memastikan panel tidak melebihi lebar layar */
     .panel {
