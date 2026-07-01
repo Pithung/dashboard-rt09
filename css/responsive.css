@@ -26,13 +26,13 @@
     
     .header {
         padding: 0 1rem;
-        height: 72px;
-        min-height: 72px; /* Tambahkan ini */
-        max-height: 72px; /* Tambahkan ini */
+        height: 68px;
+        min-height: 68px; /* Tambahkan ini */
+        max-height: 68px; /* Tambahkan ini */
     }
     
     .header-left h1 {
-        max-width: 250px; /* Perkecil batas lebar untuk layar HP agar tidak tabrakan dengan tombol tema */
+        max-width: 300px; /* Perkecil batas lebar untuk layar HP agar tidak tabrakan dengan tombol tema */
     }
 
     /* Memastikan panel tidak melebihi lebar layar */
