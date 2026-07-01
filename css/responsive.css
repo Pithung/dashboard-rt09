@@ -23,6 +23,17 @@
         overflow-x: hidden !important;
         width: 100%;
     }
+    
+    .header {
+        padding: 0 1rem;
+        height: 68px;
+        min-height: 68px; /* Tambahkan ini */
+        max-height: 68px; /* Tambahkan ini */
+    }
+    
+    .header-left h1 {
+        max-width: 150px; /* Perkecil batas lebar untuk layar HP agar tidak tabrakan dengan tombol tema */
+    }
 
     /* Memastikan panel tidak melebihi lebar layar */
     .panel {
