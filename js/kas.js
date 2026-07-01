@@ -70,61 +70,20 @@ function renderChartKas(labels, dataMasuk, dataKeluar) {
         data: {
             labels: labels,
             datasets: [
-                { 
-                    label: 'Masuk', 
-                    data: dataMasuk, 
-                    backgroundColor: 'rgba(34,197,94,0.8)', 
-                    borderRadius: 6,
-                    barPercentage: 0.8,      // Mengatur lebar batang dalam grup
-                    categoryPercentage: 0.8 // Mengatur jarak antar grup bulan
-                },
-                { 
-                    label: 'Keluar', 
-                    data: dataKeluar, 
-                    backgroundColor: 'rgba(239,68,68,0.8)', 
-                    borderRadius: 6,
-                    barPercentage: 0.8,
-                    categoryPercentage: 0.8
-                }
+                { label: 'Masuk', data: dataMasuk, backgroundColor: 'rgba(34,197,94,0.8)', borderRadius: 6 },
+                { label: 'Keluar', data: dataKeluar, backgroundColor: 'rgba(239,68,68,0.8)', borderRadius: 6 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                y: { 
-                    beginAtZero: true, 
-                    grid: { color: gridColor }, 
-                    ticks: { color: textColor } 
-                },
-                x: { 
-                    offset: true, // KUNCI PERBAIKAN: Memastikan label berada tepat di tengah grup batang
-                    grid: { display: false }, 
-                    ticks: { 
-                        color: textColor,
-                        font: {
-                            family: 'DM Sans',
-                            weight: '500'
-                        }
-                    } 
-                }
+                y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor } },
+                x: { grid: { display: false }, ticks: { color: textColor } }
             },
             plugins: {
-                legend: { 
-                    labels: { 
-                        color: textColor,
-                        font: { family: 'DM Sans' }
-                    } 
-                },
-                tooltip: {
-                    backgroundColor: isDark ? '#1e293b' : '#ffffff',
-                    titleColor: isDark ? '#f1f5f9' : '#1e293b',
-                    bodyColor: isDark ? '#cbd5e1' : '#64748b',
-                    borderColor: gridColor,
-                    borderWidth: 1
-                }
+                legend: { labels: { color: textColor } }
             }
         }
     });
 }
-
