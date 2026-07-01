@@ -144,7 +144,6 @@ body {
     white-space: nowrap;     /* KUNCI: Paksa teks tetap satu baris */
     overflow: hidden;        /* KUNCI: Sembunyikan teks yang lewat batas */
     text-overflow: ellipsis; /* KUNCI: Beri titik-titik (...) jika teks kepanjangan */
-    max-width: 200px;        /* Batasi lebar maksimal judul */
 }
 
 .header-right { display: flex; align-items: center; gap: 0.75rem; }
