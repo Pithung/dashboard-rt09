@@ -23,15 +23,15 @@ function renderKasDetail() {
     if (!kasDataCache) return;
     const jenis = document.getElementById("pilihJenisKas").value;
     const dataDipilih = kasDataCache.riwayat[jenis];
-    
-    // 1. DEFINISIKAN SEMUA BULAN (KUNCI PERBAIKAN)
-    const allMonthsLabel = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+    const daftarBulanLabel = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
     
     let tbody = "";
     let rekapBulan = {};
 
-    // Hitung data yang masuk ke dalam rekapBulan
-    if (dataDipilih && dataDipilih.length > 0) {
+    if (!dataDipilih || dataDipilih.length === 0) {
+        tbody = '<tr><td colspan="5" class="empty-state"><i class="bx bx-info-circle"></i> Tidak ada data</td></tr>';
+        renderChartKas([], [], []);
+    } else {
         dataDipilih.forEach(item => {
             if (!rekapBulan[item.bulanIndex]) rekapBulan[item.bulanIndex] = { masuk: 0, keluar: 0 };
             rekapBulan[item.bulanIndex].masuk += item.masuk;
@@ -45,23 +45,15 @@ function renderKasDetail() {
                 <td style="text-align:right; font-weight:700;">${formatRupiah(item.saldo)}</td>
             </tr>`;
         });
-    } else {
-        tbody = '<tr><td colspan="5" class="empty-state"><i class="bx bx-info-circle"></i> Tidak ada data</td></tr>';
+
+        const labels = [], masuk = [], keluar = [];
+        Object.keys(rekapBulan).sort((a,b) => a-b).forEach(k => {
+            labels.push(daftarBulanLabel[k]);
+            masuk.push(rekapBulan[k].masuk);
+            keluar.push(rekapBulan[k].keluar);
+        });
+        renderChartKas(labels, masuk, keluar);
     }
-
-    // 2. PAKSA GRAFIK MENAMPILKAN 12 BULAN
-    const labels = allMonthsLabel; // Gunakan semua bulan
-    const dataMasuk = [];
-    const dataKeluar = [];
-
-    allMonthsLabel.forEach((_, index) => {
-        // Jika bulan tersebut tidak ada transaksi, isi dengan 0
-        const val = rekapBulan[index] || { masuk: 0, keluar: 0 };
-        dataMasuk.push(val.masuk);
-        dataKeluar.push(val.keluar);
-    });
-
-    renderChartKas(labels, dataMasuk, dataKeluar);
     document.getElementById("tabelKasBody").innerHTML = tbody;
 }
 
