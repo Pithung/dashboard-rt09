@@ -26,7 +26,7 @@
 
     .header {
         padding: 0 1rem;
-        height: 80px; /* Sedikit lebih tinggi dari sebelumnya untuk mobile */
+        height: 84px; /* Sedikit lebih tinggi dari sebelumnya untuk mobile */
     }
 
     /* Memastikan panel tidak melebihi lebar layar */
