@@ -26,9 +26,9 @@
     
     .header {
         padding: 0 1rem;
-        height: 68px;
-        min-height: 68px; /* Tambahkan ini */
-        max-height: 68px; /* Tambahkan ini */
+        height: 64px;
+        min-height: 64px; /* Tambahkan ini */
+        max-height: 64px; /* Tambahkan ini */
     }
 
     /* Memastikan panel tidak melebihi lebar layar */
