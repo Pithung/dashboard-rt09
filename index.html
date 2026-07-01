@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" id="metaThemeColor" content="#ffffff">
+    <title>Dashboard Kamling RT 09</title>
+    
+    <!-- External Fonts & Icons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="bx bx-home-alt"></i>
+                </div>
+                <div class="sidebar-brand">
+                    <div class="sidebar-brand-name">RT 09 Bersatu</div>
+                    <div class="sidebar-brand-sub">Sistem Keuangan Warga</div>
+                </div>
+            </div>
+            <div class="sidebar-section-label">Menu Utama</div>
+            <ul class="nav-links">
+                <li class="nav-item active" onclick="switchPanel('siskamling', this)">
+                    <i class="bx bx-wallet-alt"></i> <span>Keuangan Kamling</span>
+                </li>
+                <li class="nav-item" onclick="switchPanel('kas', this)">
+                    <i class="bx bx-wallet"></i> <span>Keuangan RT</span>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <i class="bx bx-shield-quarter"></i> 
+                <span>© 2025 RT 09 Bersatu</span>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+            <!-- HEADER -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="btn-mobile-menu" onclick="toggleSidebar()">
+                        <i class="bx bx-menu"></i>
+                    </button>
+                    <div class="header-breadcrumb">
+                        <span class="header-breadcrumb-top">Dashboard</span>
+                        <h1 id="mainHeaderTitle">Keuangan Kamling RT 09</h1>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <span class="header-badge">RT 09</span>
+                    <button class="btn-theme" id="themeToggle" onclick="toggleTheme()" title="Toggle tema">
+                        <i class="bx bx-moon" id="themeIcon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <!-- PANEL 1: SISKAMLING -->
+                <div id="panel-siskamling" class="dashboard-panel">
+                    <div class="filter-bar">
+                        <span class="filter-bar-label">Filter:</span>
+                        <select id="filterBulan" class="filter-select" onchange="loadDashboardData()">
+                            <option value="Januari">Januari</option><option value="Februari">Februari</option>
+                            <option value="Maret">Maret</option><option value="April">April</option>
+                            <option value="Mei">Mei</option><option value="Juni">Juni</option>
+                            <option value="Juli">Juli</option><option value="Agustus">Agustus</option>
+                            <option value="September">September</option><option value="Oktober">Oktober</option>
+                            <option value="November">November</option><option value="Desember">Desember</option>
+                        </select>
+                        <select id="filterTahun" class="filter-select" onchange="loadDashboardData()">
+                            <option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option>
+                        </select>
+                    </div>
+
+                    <div class="summary-cards">
+                        <div class="card card-green">
+                            <div class="card-icon bg-green"><i class="bx bx-trending-up"></i></div>
+                            <div class="card-content">
+                                <span class="card-label" id="lblIncome">PEMASUKAN BULANAN</span>
+                                <span class="card-value" id="txtIncome">Rp 0</span>
+                            </div>
+                        </div>
+                        <div class="card card-red">
+                            <div class="card-icon bg-red"><i class="bx bx-trending-down"></i></div>
+                            <div class="card-content">
+                                <span class="card-label" id="lblOutcome">PENGELUARAN BULANAN</span>
+                                <span class="card-value" id="txtOutcome">Rp 0</span>
+                            </div>
+                        </div>
+                        <div class="card card-blue">
+                            <div class="card-icon bg-blue"><i class="bx bx-wallet"></i></div>
+                            <div class="card-content">
+                                <span class="card-label" id="lblBalanceMonth">SALDO AKHIR BULAN</span>
+                                <span class="card-value" id="txtBalanceMonth">Rp 0</span>
+                            </div>
+                        </div>
+                        <div class="card card-orange">
+                            <div class="card-icon bg-orange"><i class="bx bx-wallet-alt"></i></div>
+                            <div class="card-content">
+                                <span class="card-label">TOTAL SALDO KAS</span>
+                                <span class="card-value" id="txtBalanceTotal">Rp 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="panel" style="align-self: start;">
+                            <div class="panel-header">
+                                <div class="panel-header-icon"><i class="bx bx-bar-chart-alt-2"></i></div>
+                                <h3>Perbandingan Setoran Jimpitan</h3>
+                            </div>
+                            <div class="chart-scroll-wrapper">
+                                <div class="chart-container">
+                                    <canvas id="chartJimpitan"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-header">
+                                <div class="panel-header-icon"><i class="bx bx-receipt"></i></div>
+                                <h3 id="lblTableTitle">Rincian Pengeluaran</h3>
+                            </div>
+                            <div class="table-wrapper">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Keterangan</th>
+                                            <th style="text-align: right;">Nominal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabelPengeluaranBody">
+                                        <tr><td colspan="3" class="empty-state"><i class="bx bx-loader-alt bx-spin"></i> Memuat data...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL 2: KAS RT -->
+                <div id="panel-kas" class="dashboard-panel d-none">
+                    <div class="filter-bar">
+                        <span class="filter-bar-label">Tahun:</span>
+                        <select id="filterTahunKas" class="filter-select" onchange="loadKasData()">
+                            <option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option>
+                        </select>
+                    </div>
+                    <div class="summary-cards" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));">
+                        <div class="card card-orange">
+                            <div class="card-icon bg-orange"><i class="bx bx-coin"></i></div>
+                            <div class="card-content">
+                                <span class="card-label">KAS POTONGAN</span>
+                                <span class="card-value" id="txtKasPotongan">Rp 0</span>
+                            </div>
+                        </div>
+                        <div class="card card-blue">
+                            <div class="card-icon bg-blue"><i class="bx bx-building-house"></i></div>
+                            <div class="card-content">
+                                <span class="card-label">KAS RT</span>
+                                <span class="card-value" id="txtKasRT">Rp 0</span>
+                            </div>
+                        </div>
+                        <div class="card card-green">
+                            <div class="card-icon bg-green"><i class="bx bx-heart"></i></div>
+                            <div class="card-content">
+                                <span class="card-label">DANA SOSIAL</span>
+                                <span class="card-value" id="txtKasSosial">Rp 0</span>
+                            </div>
+                        </div>
+                        <div class="card card-red">
+                            <div class="card-icon bg-red"><i class="bx bx-party"></i></div>
+                            <div class="card-content">
+                                <span class="card-label">MERTI DUSUN</span>
+                                <span class="card-value" id="txtKasMerti">Rp 0</span>
+                            </div>
+                        </div>
+                        <div class="card card-red">
+                            <div class="card-icon bg-red"><i class="bx bx-flag"></i></div>
+                            <div class="card-content">
+                                <span class="card-label">KAS 17-AN</span>
+                                <span class="card-value" id="txtKas17">Rp 0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-divider">
+                        <select id="pilihJenisKas" class="filter-select" onchange="renderKasDetail()">
+                            <option value="potongan">Rekap Kas Potongan Arisan</option>
+                            <option value="rt">Rekap Kas RT</option>
+                            <option value="sosial">Rekap Kas Dana Sosial</option>
+                            <option value="merti">Rekap Kas Merti Dusun</option>
+                            <option value="tujuhbelas">Rekap Kas 17-an</option>
+                        </select>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="panel" style="align-self: start;">
+                            <div class="panel-header">
+                                <div class="panel-header-icon"><i class="bx bx-line-chart"></i></div>
+                                <h3 id="lblKasChart">Grafik Pemasukan vs Pengeluaran</h3>
+                            </div>
+                            <div class="chart-scroll-wrapper">
+                                <div class="chart-container" id="chartKasContainer">
+                                    <canvas id="chartKas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-header">
+                                <div class="panel-header-icon"><i class="bx bx-list-ul"></i></div>
+                                <h3 id="lblKasTable">Riwayat Transaksi</h3>
+                            </div>
+                            <div class="table-wrapper">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Keterangan</th>
+                                            <th style="text-align:right">Masuk</th>
+                                            <th style="text-align:right">Keluar</th>
+                                            <th style="text-align:right">Saldo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabelKasBody">
+                                        <tr><td colspan="5" class="empty-state"><i class="bx bx-info-circle"></i> Pilih kas untuk melihat data</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JS Files -->
+    <script src="js/api.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/kas.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+[data-theme="dark"] {
+    --primary: #34d399;
+    --primary-dark: #10b981;
+    --primary-bg: rgba(52, 211, 153, 0.1);
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+    --income: #4ade80;
+    --expense: #f87171;
+    --balance: #60a5fa;
+    --total: #fbbf24;
+}
