@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlsu25XOFz639jfZCIV9CiBnqmhcyrM0quzA_zckCmGDO4ADDaasZQfjvZnwDTMQht/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJY3o6xqWfnPCUwppO1E1ZegxWyVG6yYpSm-mhd15rd-LQzFjRPVhi-5tiUjs7jz99/exec';
 
 async function fetchFromAppsScript(action, params = {}) {
     let url = `${APPS_SCRIPT_URL}?action=${encodeURIComponent(action)}`;
