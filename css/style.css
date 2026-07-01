@@ -113,7 +113,7 @@ body {
 .header {
     background-color: var(--bg-card);
     padding: 0 2rem;
-    height: 64px;
+    height: 72px; /* Dinaikkan dari 64px agar lebih proporsional di mobile */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -239,6 +239,7 @@ body {
     box-shadow: var(--shadow-md);
     padding: 1.5rem;
     border: 1px solid var(--border);
+    overflow: hidden; /* KUNCI: Mencegah konten di dalam panel mendorong lebar halaman */
 }
 
 .panel-header {
@@ -261,7 +262,11 @@ body {
 }
 
 /* TABLE */
-.table-wrapper { overflow-x: auto; max-height: 400px; }
+.table-wrapper, .chart-scroll-wrapper { 
+    overflow-x: auto; 
+    width: 100%; 
+    -webkit-overflow-scrolling: touch; /* Agar scroll di iPhone lebih smooth */
+}
 .data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem; }
 .data-table th, .data-table td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); }
 .data-table th {
