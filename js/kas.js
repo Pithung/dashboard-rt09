@@ -62,11 +62,6 @@ function renderChartKas(labels, dataMasuk, dataKeluar) {
     const textColor = isDark ? '#cbd5e1' : '#64748b';
     const gridColor = isDark ? '#334155' : '#e2e8f0';
     
-    // 3. SET MIN-WIDTH UNTUK CONTAINER (KUNCI SCROLLVIEW)
-    // Kita set 800px agar 12 bulan tidak berdesakan dan terlihat lega
-    const container = document.getElementById('chartKasContainer');
-    container.style.minWidth = '800px'; 
-
     const ctx = document.getElementById('chartKas').getContext('2d');
     if (myKasChart) myKasChart.destroy();
     
@@ -80,8 +75,8 @@ function renderChartKas(labels, dataMasuk, dataKeluar) {
                     data: dataMasuk, 
                     backgroundColor: 'rgba(34,197,94,0.8)', 
                     borderRadius: 6,
-                    barPercentage: 0.8,
-                    categoryPercentage: 0.8
+                    barPercentage: 0.8,      // Mengatur lebar batang dalam grup
+                    categoryPercentage: 0.8 // Mengatur jarak antar grup bulan
                 },
                 { 
                     label: 'Keluar', 
@@ -103,22 +98,30 @@ function renderChartKas(labels, dataMasuk, dataKeluar) {
                     ticks: { color: textColor } 
                 },
                 x: { 
-                    offset: true, 
+                    offset: true, // KUNCI PERBAIKAN: Memastikan label berada tepat di tengah grup batang
                     grid: { display: false }, 
                     ticks: { 
                         color: textColor,
-                        font: { family: 'DM Sans', weight: '500' }
+                        font: {
+                            family: 'DM Sans',
+                            weight: '500'
+                        }
                     } 
                 }
             },
             plugins: {
                 legend: { 
-                    labels: { color: textColor, font: { family: 'DM Sans' } } 
+                    labels: { 
+                        color: textColor,
+                        font: { family: 'DM Sans' }
+                    } 
                 },
                 tooltip: {
                     backgroundColor: isDark ? '#1e293b' : '#ffffff',
                     titleColor: isDark ? '#f1f5f9' : '#1e293b',
                     bodyColor: isDark ? '#cbd5e1' : '#64748b',
+                    borderColor: gridColor,
+                    borderWidth: 1
                 }
             }
         }
