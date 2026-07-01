@@ -113,7 +113,7 @@ body {
 .header {
     background-color: var(--bg-card);
     padding: 0 2rem;
-    height: 88px; /* Dinaikkan dari 64px agar lebih proporsional di mobile */
+    height: 72px; /* Dinaikkan dari 64px agar lebih proporsional di mobile */
     display: flex;
     justify-content: space-between;
     align-items: center;
