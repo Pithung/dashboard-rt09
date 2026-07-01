@@ -23,15 +23,15 @@ function renderKasDetail() {
     if (!kasDataCache) return;
     const jenis = document.getElementById("pilihJenisKas").value;
     const dataDipilih = kasDataCache.riwayat[jenis];
-    const daftarBulanLabel = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+    
+    // 1. DEFINISIKAN SEMUA BULAN (KUNCI PERBAIKAN)
+    const allMonthsLabel = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
     
     let tbody = "";
     let rekapBulan = {};
 
-    if (!dataDipilih || dataDipilih.length === 0) {
-        tbody = '<tr><td colspan="5" class="empty-state"><i class="bx bx-info-circle"></i> Tidak ada data</td></tr>';
-        renderChartKas([], [], []);
-    } else {
+    // Hitung data yang masuk ke dalam rekapBulan
+    if (dataDipilih && dataDipilih.length > 0) {
         dataDipilih.forEach(item => {
             if (!rekapBulan[item.bulanIndex]) rekapBulan[item.bulanIndex] = { masuk: 0, keluar: 0 };
             rekapBulan[item.bulanIndex].masuk += item.masuk;
@@ -45,15 +45,23 @@ function renderKasDetail() {
                 <td style="text-align:right; font-weight:700;">${formatRupiah(item.saldo)}</td>
             </tr>`;
         });
-
-        const labels = [], masuk = [], keluar = [];
-        Object.keys(rekapBulan).sort((a,b) => a-b).forEach(k => {
-            labels.push(daftarBulanLabel[k]);
-            masuk.push(rekapBulan[k].masuk);
-            keluar.push(rekapBulan[k].keluar);
-        });
-        renderChartKas(labels, masuk, keluar);
+    } else {
+        tbody = '<tr><td colspan="5" class="empty-state"><i class="bx bx-info-circle"></i> Tidak ada data</td></tr>';
     }
+
+    // 2. PAKSA GRAFIK MENAMPILKAN 12 BULAN
+    const labels = allMonthsLabel; // Gunakan semua bulan
+    const dataMasuk = [];
+    const dataKeluar = [];
+
+    allMonthsLabel.forEach((_, index) => {
+        // Jika bulan tersebut tidak ada transaksi, isi dengan 0
+        const val = rekapBulan[index] || { masuk: 0, keluar: 0 };
+        dataMasuk.push(val.masuk);
+        dataKeluar.push(val.keluar);
+    });
+
+    renderChartKas(labels, dataMasuk, dataKeluar);
     document.getElementById("tabelKasBody").innerHTML = tbody;
 }
 
@@ -62,6 +70,11 @@ function renderChartKas(labels, dataMasuk, dataKeluar) {
     const textColor = isDark ? '#cbd5e1' : '#64748b';
     const gridColor = isDark ? '#334155' : '#e2e8f0';
     
+    // 3. SET MIN-WIDTH UNTUK CONTAINER (KUNCI SCROLLVIEW)
+    // Kita set 800px agar 12 bulan tidak berdesakan dan terlihat lega
+    const container = document.getElementById('chartKasContainer');
+    container.style.minWidth = '800px'; 
+
     const ctx = document.getElementById('chartKas').getContext('2d');
     if (myKasChart) myKasChart.destroy();
     
@@ -70,20 +83,53 @@ function renderChartKas(labels, dataMasuk, dataKeluar) {
         data: {
             labels: labels,
             datasets: [
-                { label: 'Masuk', data: dataMasuk, backgroundColor: 'rgba(34,197,94,0.8)', borderRadius: 6 },
-                { label: 'Keluar', data: dataKeluar, backgroundColor: 'rgba(239,68,68,0.8)', borderRadius: 6 }
+                { 
+                    label: 'Masuk', 
+                    data: dataMasuk, 
+                    backgroundColor: 'rgba(34,197,94,0.8)', 
+                    borderRadius: 6,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.8
+                },
+                { 
+                    label: 'Keluar', 
+                    data: dataKeluar, 
+                    backgroundColor: 'rgba(239,68,68,0.8)', 
+                    borderRadius: 6,
+                    barPercentage: 0.8,
+                    categoryPercentage: 0.8
+                }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor } },
-                x: { grid: { display: false }, ticks: { color: textColor } }
+                y: { 
+                    beginAtZero: true, 
+                    grid: { color: gridColor }, 
+                    ticks: { color: textColor } 
+                },
+                x: { 
+                    offset: true, 
+                    grid: { display: false }, 
+                    ticks: { 
+                        color: textColor,
+                        font: { family: 'DM Sans', weight: '500' }
+                    } 
+                }
             },
             plugins: {
-                legend: { labels: { color: textColor } }
+                legend: { 
+                    labels: { color: textColor, font: { family: 'DM Sans' } } 
+                },
+                tooltip: {
+                    backgroundColor: isDark ? '#1e293b' : '#ffffff',
+                    titleColor: isDark ? '#f1f5f9' : '#1e293b',
+                    bodyColor: isDark ? '#cbd5e1' : '#64748b',
+                }
             }
         }
     });
 }
+
