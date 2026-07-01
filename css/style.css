@@ -273,7 +273,8 @@ body {
 /* TABLE */
 .table-wrapper, .chart-scroll-wrapper { 
     overflow-x: auto; 
-    width: 100%; 
+    width: 100%;
+    max-height: 600px;
     -webkit-overflow-scrolling: touch; /* Agar scroll di iPhone lebih smooth */
 }
 .data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem; }
