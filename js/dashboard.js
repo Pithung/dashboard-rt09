@@ -11,9 +11,9 @@ async function loadDashboardData() {
     try {
         const res = await fetchFromAppsScript('getDataDashboard', { bulan: bln, tahun: thn });
         
-        document.getElementById("lblIncome").innerText = `PEMASUKAN ${bln.toUpperCase()}`;
-        document.getElementById("lblOutcome").innerText = `PENGELUARAN ${bln.toUpperCase()}`;
-        document.getElementById("lblBalanceMonth").innerText = `SALDO ${bln.toUpperCase()}`;
+        document.getElementById("lblIncome").innerText = `PEMASUKAN BULAN ${bln.toUpperCase()}`;
+        document.getElementById("lblOutcome").innerText = `PENGELUARAN BULAN ${bln.toUpperCase()}`;
+        document.getElementById("lblBalanceMonth").innerText = `SALDO BULAN ${bln.toUpperCase()}`;
         document.getElementById("lblTableTitle").innerText = `Pengeluaran Bulan ${bln}`;
 
         document.getElementById("txtIncome").innerText = formatRupiah(res.pemasukan);
