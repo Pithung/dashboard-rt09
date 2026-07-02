@@ -307,6 +307,5 @@ body {
 }
 .chart-container { 
     position: relative; 
-    height: 350px; /* Ubah angka ini untuk menambah/mengurangi tinggi area grafik */
-    min-width: 400px; 
+    height: 250px; /* Ubah angka ini untuk menambah/mengurangi tinggi area grafik */
 }
