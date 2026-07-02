@@ -272,7 +272,9 @@ body {
 
 /* TABLE */
 .table-wrapper, .chart-scroll-wrapper { 
-    overflow-x: auto; 
+    overflow-x: auto; /* Scroll samping untuk mobile */
+    overflow-y: auto; /* KUNCI: Scroll atas-bawah jika data banyak */
+    max-height: 400px; /* Batas maksimal tinggi tabel sebelum muncul scroll */
     width: 100%;
     -webkit-overflow-scrolling: touch; /* Agar scroll di iPhone lebih smooth */
 }
@@ -284,6 +286,9 @@ body {
     font-weight: 700;
     font-size: 0.72rem;
     text-transform: uppercase;
+    position: sticky; /* KUNCI: Membuat header tetap di atas */
+    top: 0;           /* Menempel di posisi paling atas wrapper */
+    z-index: 10;      /* Agar tidak tertutup oleh isi tabel */
 }
 .data-table tbody tr:hover { background: var(--bg-hover); }
 
@@ -299,4 +304,9 @@ body {
     background: rgba(0,0,0,0.5);
     z-index: 999;
     backdrop-filter: blur(2px);
+}
+.chart-container { 
+    position: relative; 
+    height: 350px; /* Ubah angka ini untuk menambah/mengurangi tinggi area grafik */
+    min-width: 400px; 
 }
