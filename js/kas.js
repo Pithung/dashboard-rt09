@@ -53,7 +53,7 @@ function renderKasDetail() {
     allMonthsLabel.forEach((_, index) => {
         const val = rekapBulan[index] || { masuk: 0, keluar: 0 };
         dataMasuk.push(val.masuk);
-        // KUNCI: Ubah pengeluaran menjadi NEGATIF agar batang tumbuh ke bawah
+        // KUNCI: Ubah pengeluaran menjadi NEGATIF agar batang tumbuh ke bawah ok
         dataKeluar.push(val.keluar * -1); 
     });
 
