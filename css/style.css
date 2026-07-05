@@ -118,8 +118,8 @@ body {
     background-color: var(--bg-card);
     padding: 0 2rem;
     height: 64px;
-    /* min-height: 64px; /* Tambahkan ini */
-    /* max-height: 64px; /* Tambahkan ini */
+    min-height: 64px; /* Tambahkan ini */
+    max-height: 64px; /* Tambahkan ini */
     display: flex;
     justify-content: space-between;
     align-items: center;
