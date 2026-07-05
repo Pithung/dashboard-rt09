@@ -48,11 +48,13 @@ body {
 }
 
 .sidebar-header {
-    padding: 1.5rem 0.5rem 0.75rem;
+    height: 72px;            /* SAMAKAN dengan tinggi .header utama */
+    padding: 0 1.5rem;       /* Hapus padding atas-bawah, sisakan padding kiri-kanan saja */
     border-bottom: 1px solid var(--border);
     display: flex;
-    align-items: center;
+    align-items: center;     /* Memastikan logo & teks berada tepat di tengah secara vertikal */
     gap: 0.75rem;
+    box-sizing: border-box;  /* Memastikan padding tidak menambah total tinggi */
 }
 
 .sidebar-logo {
