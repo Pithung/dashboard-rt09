@@ -27,8 +27,8 @@
     .header {
         padding: 0 1rem;
         height: 64px;
-        min-height: 64px; /* Tambahkan ini */
-        max-height: 64px; /* Tambahkan ini */
+        /* min-height: 64px; /* Tambahkan ini */
+        /* max-height: 64px; /* Tambahkan ini */
     }
 
     /* Memastikan panel tidak melebihi lebar layar */
@@ -46,6 +46,6 @@
 
     .sidebar-header {
         height: 64px;        /* SAMAKAN dengan tinggi .header mobile */
-        min-height: 64px; /* Tambahkan ini */
-        max-height: 64px; /* Tambahkan ini */
+        /* min-height: 64px; /* Tambahkan ini */
+        /* max-height: 64px; /* Tambahkan ini */
 }
