@@ -117,7 +117,7 @@ body {
 .header {
     background-color: var(--bg-card);
     padding: 0 2rem;
-    height: 68px;
+    height: 64px;
     /* min-height: 64px; /* Tambahkan ini */
     /* max-height: 64px; /* Tambahkan ini */
     display: flex;
