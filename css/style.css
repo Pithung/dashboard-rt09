@@ -49,6 +49,8 @@ body {
 
 .sidebar-header {
     height: 72px;            /* SAMAKAN dengan tinggi .header utama */
+    min-height: 72px; /* Tambahkan ini */
+    max-height: 72px; /* Tambahkan ini */
     padding: 0 1.5rem;       /* Hapus padding atas-bawah, sisakan padding kiri-kanan saja */
     border-bottom: 1px solid var(--border);
     display: flex;
