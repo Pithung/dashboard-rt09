@@ -46,4 +46,6 @@
 
     .sidebar-header {
         height: 64px;        /* SAMAKAN dengan tinggi .header mobile */
+        min-height: 64px; /* Tambahkan ini */
+        max-height: 64px; /* Tambahkan ini */
 }
