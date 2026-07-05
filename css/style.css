@@ -48,9 +48,9 @@ body {
 }
 
 .sidebar-header {
-    height: 72px;            /* SAMAKAN dengan tinggi .header utama */
-    min-height: 72px; /* Tambahkan ini */
-    max-height: 72px; /* Tambahkan ini */
+    height: 64px;            /* SAMAKAN dengan tinggi .header utama */
+    min-height: 64px; /* Tambahkan ini */
+    max-height: 64px; /* Tambahkan ini */
     padding: 0 1.5rem;       /* Hapus padding atas-bawah, sisakan padding kiri-kanan saja */
     border-bottom: 1px solid var(--border);
     display: flex;
@@ -117,9 +117,9 @@ body {
 .header {
     background-color: var(--bg-card);
     padding: 0 2rem;
-    height: 72px;
-    min-height: 72px; /* Tambahkan ini */
-    max-height: 72px; /* Tambahkan ini */
+    height: 64px;
+    min-height: 64px; /* Tambahkan ini */
+    max-height: 64px; /* Tambahkan ini */
     display: flex;
     justify-content: space-between;
     align-items: center;
