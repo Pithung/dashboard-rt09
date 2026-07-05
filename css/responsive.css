@@ -43,4 +43,7 @@
         width: 100%;
         overflow-x: auto;
     }
+
+    .sidebar-header {
+        height: 64px;        /* SAMAKAN dengan tinggi .header mobile */
 }
