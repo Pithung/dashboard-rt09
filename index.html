@@ -3,255 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" id="metaThemeColor" content="#ffffff">
-    <title>Dashboard RT 09 Bersatu</title>
-    
+    <meta name="theme-color" id="metaThemeColor" content="#10b981">
+    <meta name="description" content="Website resmi RT 09 Bersatu - informasi keuangan, jimpitan, kas RT, dan pengumuman warga.">
+    <title>RT 09 Bersatu</title>
+
     <!-- External Fonts & Icons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dark.css">
+    <link rel="stylesheet" href="css/landing.css">
     <link rel="stylesheet" href="css/responsive.css">
-    
+
     <!-- Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 </head>
-<body>
-    <div class="app-container">
-        <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+<body class="landing-body">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-logo">
-                    <i class="bx bx-home-alt"></i>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="#beranda" class="navbar-brand">
+            <span class="navbar-logo"><i class="bx bx-home-alt"></i></span>
+            <span class="navbar-brand-text">
+                <strong>RT 09</strong> Bersatu
+            </span>
+        </a>
+        <ul class="navbar-menu" id="navbarMenu">
+            <li><a href="#beranda" class="navbar-link active">Beranda</a></li>
+            <li><a href="#tentang" class="navbar-link">Tentang</a></li>
+            <li><a href="#info" class="navbar-link">Info Warga</a></li>
+            <li><a href="dashboard.html" class="navbar-cta">Dashboard <i class="bx bx-right-arrow-alt"></i></a></li>
+            <li>
+                <button class="btn-theme btn-theme-landing" id="themeToggle" onclick="toggleTheme()" title="Toggle tema">
+                    <i class="bx bx-moon" id="themeIcon"></i>
+                </button>
+            </li>
+        </ul>
+        <button class="btn-mobile-menu nav-burger" id="navBurger" onclick="toggleNavbar()">
+            <i class="bx bx-menu"></i>
+        </button>
+    </nav>
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="toggleNavbar()"></div>
+
+    <!-- HERO -->
+    <header class="hero" id="beranda">
+        <div class="hero-bg-shape"></div>
+        <div class="hero-bg-shape hero-bg-shape-2"></div>
+        <div class="hero-inner">
+            <div class="hero-text">
+                <span class="hero-badge"><i class="bx bx-shield-quarter"></i> Sistem Informasi RT 09</span>
+                <h1 class="hero-title">
+                    Selamat Datang di <span class="hero-accent">RT 09 Bersatu</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Satu rumah digital untuk warga. Pantau keuangan kas, setoran jimpitan, dan
+                    informasi terbaru lingkungan kita — semua transparan dan mudah diakses.
+                </p>
+                <div class="hero-actions">
+                    <a href="dashboard.html" class="btn btn-primary">
+                        <i class="bx bx-pie-chart-alt"></i> Buka Dashboard
+                    </a>
+                    <a href="#tentang" class="btn btn-ghost">
+                        <i class="bx bx-info-circle"></i> Kenali RT Kita
+                    </a>
                 </div>
-                <div class="sidebar-brand">
-                    <div class="sidebar-brand-name">RT 09 Bersatu</div>
-                    <div class="sidebar-brand-sub">Pembukuan Keuangan Warga</div>
+                <div class="hero-mini-stats">
+                    <div class="hero-mini">
+                        <i class="bx bx-users"></i>
+                        <span><strong id="miniWarga">—</strong><small>Warga</small></span>
+                    </div>
+                    <div class="hero-mini">
+                        <i class="bx bx-wallet"></i>
+                        <span><strong id="miniSaldo">—</strong><small>Saldo Kamling</small></span>
+                    </div>
+                    <div class="hero-mini">
+                        <i class="bx bx-calendar-heart"></i>
+                        <span><strong id="miniAcara">—</strong><small>Kegiatan</small></span>
+                    </div>
                 </div>
             </div>
-            <div class="sidebar-section-label">Menu</div>
-            <ul class="nav-links">
-                <li class="nav-item active" onclick="switchPanel('siskamling', this)">
-                    <i class="bx bx-wallet-alt"></i> <span>Keuangan Kamling</span>
-                </li>
-                <li class="nav-item" onclick="switchPanel('kas', this)">
-                    <i class="bx bx-wallet"></i> <span>Keuangan RT</span>
-                </li>
-            </ul>
-            <div class="sidebar-footer">
-                <i class="bx bx-shield-quarter"></i> 
-                <span>© 2025 RT 09 Bersatu</span>
+            <div class="hero-visual">
+                <div class="hero-card hero-card-main">
+                    <div class="hero-card-header">
+                        <span><i class="bx bx-wallet-alt"></i> Ringkasan Keuangan</span>
+                        <span class="hero-card-badge" id="heroCardPeriod">—</span>
+                    </div>
+                    <div class="hero-card-row">
+                        <span>Pemasukan</span>
+                        <strong class="text-success-custom" id="heroIncome">Rp 0</strong>
+                    </div>
+                    <div class="hero-card-row">
+                        <span>Pengeluaran</span>
+                        <strong class="text-danger-custom" id="heroOutcome">Rp 0</strong>
+                    </div>
+                    <div class="hero-card-row hero-card-row-total">
+                        <span>Total Saldo</span>
+                        <strong id="heroSaldo">Rp 0</strong>
+                    </div>
+                    <div class="hero-card-bar">
+                        <div class="hero-card-bar-fill" id="heroBarFill" style="width:0%"></div>
+                    </div>
+                    <small class="hero-card-hint">Data terhubung langsung dengan pembukuan RT.</small>
+                </div>
+                <div class="hero-card hero-card-float">
+                    <i class="bx bx-coin"></i>
+                    <div>
+                        <strong id="heroKasRT">Rp 0</strong>
+                        <small>Saldo Kamling</small>
+                    </div>
+                </div>
             </div>
-        </aside>
-
-        <div class="main-wrapper">
-            <!-- HEADER -->
-            <header class="header">
-                <div class="header-left">
-                    <button class="btn-mobile-menu" onclick="toggleSidebar()">
-                        <i class="bx bx-menu"></i>
-                    </button>
-                    <div class="header-breadcrumb">
-                        <span class="header-breadcrumb-top">Dashboard</span>
-                        <h1 id="mainHeaderTitle">Keuangan Kamling RT 09</h1>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <span class="header-badge">RT 09</span>
-                    <button class="btn-theme" id="themeToggle" onclick="toggleTheme()" title="Toggle tema">
-                        <i class="bx bx-moon" id="themeIcon"></i>
-                    </button>
-                </div>
-            </header>
-
-            <main class="main-content">
-                <!-- PANEL 1: SISKAMLING -->
-                <div id="panel-siskamling" class="dashboard-panel">
-                    <div class="filter-bar">
-                        <span class="filter-bar-label">Filter:</span>
-                        <select id="filterBulan" class="filter-select" onchange="loadDashboardData()">
-                            <option value="Januari">Januari</option><option value="Februari">Februari</option>
-                            <option value="Maret">Maret</option><option value="April">April</option>
-                            <option value="Mei">Mei</option><option value="Juni">Juni</option>
-                            <option value="Juli">Juli</option><option value="Agustus">Agustus</option>
-                            <option value="September">September</option><option value="Oktober">Oktober</option>
-                            <option value="November">November</option><option value="Desember">Desember</option>
-                        </select>
-                        <select id="filterTahun" class="filter-select" onchange="loadDashboardData()">
-                            <option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option>
-                        </select>
-                    </div>
-
-                    <div class="summary-cards">
-                        <div class="card card-green">
-                            <div class="card-icon bg-green"><i class="bx bx-trending-up"></i></div>
-                            <div class="card-content">
-                                <span class="card-label" id="lblIncome">PEMASUKAN BULANAN</span>
-                                <span class="card-value" id="txtIncome">Rp 0</span>
-                            </div>
-                        </div>
-                        <div class="card card-red">
-                            <div class="card-icon bg-red"><i class="bx bx-trending-down"></i></div>
-                            <div class="card-content">
-                                <span class="card-label" id="lblOutcome">PENGELUARAN BULANAN</span>
-                                <span class="card-value" id="txtOutcome">Rp 0</span>
-                            </div>
-                        </div>
-                        <div class="card card-blue">
-                            <div class="card-icon bg-blue"><i class="bx bx-wallet"></i></div>
-                            <div class="card-content">
-                                <span class="card-label" id="lblBalanceMonth">SALDO AKHIR BULAN</span>
-                                <span class="card-value" id="txtBalanceMonth">Rp 0</span>
-                            </div>
-                        </div>
-                        <div class="card card-orange">
-                            <div class="card-icon bg-orange"><i class="bx bx-wallet-alt"></i></div>
-                            <div class="card-content">
-                                <span class="card-label">TOTAL SALDO KAS</span>
-                                <span class="card-value" id="txtBalanceTotal">Rp 0</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-grid">
-                        <div class="panel" style="align-self: start;">
-                            <div class="panel-header">
-                                <div class="panel-header-icon"><i class="bx bx-bar-chart-alt-2"></i></div>
-                                <h3>Perbandingan Setoran Jimpitan</h3>
-                            </div>
-                            <div class="chart-scroll-wrapper">
-                                <div class="chart-container">
-                                    <canvas id="chartJimpitan"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <div class="panel-header">
-                                <div class="panel-header-icon"><i class="bx bx-receipt"></i></div>
-                                <h3 id="lblTableTitle">Rincian Pengeluaran</h3>
-                            </div>
-                            <div class="table-wrapper">
-                                <table class="data-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Tanggal</th>
-                                            <th>Keterangan</th>
-                                            <th style="text-align: right;">Nominal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tabelPengeluaranBody">
-                                        <tr><td colspan="3" class="empty-state"><i class="bx bx-loader-alt bx-spin"></i> Memuat data...</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PANEL 2: KAS RT -->
-                <div id="panel-kas" class="dashboard-panel d-none">
-                    <div class="filter-bar">
-                        <span class="filter-bar-label">Tahun:</span>
-                        <select id="filterTahunKas" class="filter-select" onchange="loadKasData()">
-                            <option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option>
-                        </select>
-                    </div>
-                    <div class="summary-cards" style="grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));">
-                        <div class="card card-orange">
-                            <div class="card-icon bg-orange"><i class="bx bx-coin"></i></div>
-                            <div class="card-content">
-                                <span class="card-label">POTONGAN ARISAN</span>
-                                <span class="card-value" id="txtKasPotongan">Rp 0</span>
-                            </div>
-                        </div>
-                        <div class="card card-blue">
-                            <div class="card-icon bg-blue"><i class="bx bx-building-house"></i></div>
-                            <div class="card-content">
-                                <span class="card-label">KAS RT</span>
-                                <span class="card-value" id="txtKasRT">Rp 0</span>
-                            </div>
-                        </div>
-                        <div class="card card-green">
-                            <div class="card-icon bg-green"><i class="bx bx-heart"></i></div>
-                            <div class="card-content">
-                                <span class="card-label">DANA SOSIAL</span>
-                                <span class="card-value" id="txtKasSosial">Rp 0</span>
-                            </div>
-                        </div>
-                        <div class="card card-red">
-                            <div class="card-icon bg-red"><i class="bx bx-party"></i></div>
-                            <div class="card-content">
-                                <span class="card-label">MERTI DUSUN</span>
-                                <span class="card-value" id="txtKasMerti">Rp 0</span>
-                            </div>
-                        </div>
-                        <div class="card card-red">
-                            <div class="card-icon bg-red"><i class="bx bx-flag"></i></div>
-                            <div class="card-content">
-                                <span class="card-label">KAS 17-AN</span>
-                                <span class="card-value" id="txtKas17">Rp 0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-divider">
-                        <select id="pilihJenisKas" class="filter-select" onchange="renderKasDetail()">
-                            <option value="potongan">Rekap Kas Potongan Arisan</option>
-                            <option value="rt">Rekap Kas RT</option>
-                            <option value="sosial">Rekap Kas Dana Sosial</option>
-                            <option value="merti">Rekap Kas Merti Dusun</option>
-                            <option value="tujuhbelas">Rekap Kas 17-an</option>
-                        </select>
-                    </div>
-                    <div class="dashboard-grid">
-                        <div class="panel" style="align-self: start;">
-                            <div class="panel-header">
-                                <div class="panel-header-icon"><i class="bx bx-line-chart"></i></div>
-                                <h3 id="lblKasChart">Grafik Pemasukan vs Pengeluaran</h3>
-                            </div>
-                            <div class="chart-scroll-wrapper">
-                                <div class="chart-container" id="chartKasContainer">
-                                    <canvas id="chartKas"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <div class="panel-header">
-                                <div class="panel-header-icon"><i class="bx bx-list-ul"></i></div>
-                                <h3 id="lblKasTable">Riwayat Transaksi</h3>
-                            </div>
-                            <div class="table-wrapper">
-                                <table class="data-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Tanggal</th>
-                                            <th>Keterangan</th>
-                                            <th style="text-align:right">Masuk</th>
-                                            <th style="text-align:right">Keluar</th>
-                                            <th style="text-align:right">Saldo</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tabelKasBody">
-                                        <tr><td colspan="5" class="empty-state"><i class="bx bx-info-circle"></i> Pilih kas untuk melihat data</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
         </div>
-    </div>
+    </header>
+
+    <!-- QUICK STATS -->
+    <section class="stats-section">
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card stat-green">
+                <div class="stat-icon"><i class="bx bx-trending-up"></i></div>
+                <div class="stat-body">
+                    <span class="stat-label">Pemasukan Bulan Ini</span>
+                    <span class="stat-value" id="statIncome">Rp 0</span>
+                </div>
+            </div>
+            <div class="stat-card stat-red">
+                <div class="stat-icon"><i class="bx bx-trending-down"></i></div>
+                <div class="stat-body">
+                    <span class="stat-label">Pengeluaran Bulan Ini</span>
+                    <span class="stat-value" id="statOutcome">Rp 0</span>
+                </div>
+            </div>
+            <div class="stat-card stat-orange">
+                <div class="stat-icon"><i class="bx bx-wallet-alt"></i></div>
+                <div class="stat-body">
+                    <span class="stat-label">Total Saldo Kas</span>
+                    <span class="stat-value" id="statTotal">Rp 0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section class="about-section" id="tentang">
+        <div class="section-head">
+            <span class="section-eyebrow">Tentang Kami</span>
+            <h2 class="section-title">Kenali RT 09 Bersatu</h2>
+            <p class="section-desc">
+                RT 09 adalah komunitas warga yang menjunjung transparansi dan gotong royong.
+                Melalui dashboard ini, setiap warga dapat memantau langsung kondisi keuangan
+                lingkungan secara real-time.
+            </p>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bx bx-wallet-alt"></i></div>
+                <h3>Keuangan Kamling</h3>
+                <p>Rekap setoran jimpitan harian dan kas keamanan lingkungan yang transparan.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bx bx-building-house"></i></div>
+                <h3>Kas RT</h3>
+                <p>Catatan lengkap lima kategori kas: potongan arisan, RT, sosial, merti dusun, dan 17-an.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bx bx-bar-chart-alt-2"></i></div>
+                <h3>Laporan Visual</h3>
+                <p>Grafik interaktif yang memudahkan memahami arus kas setiap bulan dan tahun.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="bx bx-bulb"></i></div>
+                <h3>Info Warga</h3>
+                <p>Pengumuman, jadwal ronda, dan kegiatan terbaru dalam genggaman.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFO WARGA -->
+    <section class="info-section" id="info">
+        <div class="section-head">
+            <span class="section-eyebrow">Update Terbaru</span>
+            <h2 class="section-title">Info Warga & Pengumuman</h2>
+            <p class="section-desc">Pengumuman dan kegiatan terkini seputar lingkungan RT 09.</p>
+        </div>
+        <div class="info-grid" id="infoGrid">
+            <article class="info-card">
+                <div class="info-tag info-tag-green"><i class="bx bx-calendar"></i> Jadwal</div>
+                <h3>Jadwal Ronda Malam</h3>
+                <p>Ronda bergiliran tiap RT dilaksanakan pukul 21.00–03.00 WIB. Cek papan pengumuman poskamling untuk pembagian hari.</p>
+                <span class="info-date"><i class="bx bx-time"></i> Setiap hari</span>
+            </article>
+            <article class="info-card">
+                <div class="info-tag info-tag-blue"><i class="bx bx-money"></i> Keuangan</div>
+                <h3>Setoran Jimpitan</h3>
+                <p>Setoran jimpitan harian dapat dipantau langsung di dashboard. Terima kasih atas kekompakan warga dalam iuran lingkungan.</p>
+                <span class="info-date"><i class="bx bx-time"></i> Bulanan</span>
+            </article>
+            <article class="info-card">
+                <div class="info-tag info-tag-orange"><i class="bx bx-party"></i> Acara</div>
+                <h3>Kegiatan Merti Dusun</h3>
+                <p>Dana merti dusun terkumpul dari kas warga. Rencana kegiatan tahunan akan diumumkan menjelang pelaksanaan.</p>
+                <span class="info-date"><i class="bx bx-time"></i> Tahunan</span>
+            </article>
+        </div>
+        <p class="info-note">
+            <i class="bx bx-info-circle"></i> Ingin menambah pengumuman? Hubungi pengurus RT melalui
+            <a href="#" onclick="return false;">grup WhatsApp warga</a>.
+        </p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-box">
+            <div class="cta-text">
+                <h2>Akses Dashboard Lengkap</h2>
+                <p>Lihat grafik, riwayat transaksi, dan rekap kas RT secara detail dan transparan.</p>
+            </div>
+            <a href="dashboard.html" class="btn btn-light">
+                <i class="bx bx-pie-chart-alt"></i> Masuk ke Dashboard
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="navbar-logo"><i class="bx bx-home-alt"></i></span>
+                <div>
+                    <strong>RT 09 Bersatu</strong>
+                    <small>Pembukuan Keuangan Warga</small>
+                </div>
+            </div>
+            <div class="footer-links">
+                <a href="#beranda">Beranda</a>
+                <a href="#tentang">Tentang</a>
+                <a href="#info">Info Warga</a>
+                <a href="dashboard.html">Dashboard</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 RT 09 Bersatu. Dibuat dengan gotong royong.</span>
+        </div>
+    </footer>
 
     <!-- JS Files -->
     <script src="js/api.js"></script>
     <script src="js/theme.js"></script>
-    <script src="js/dashboard.js"></script>
-    <script src="js/kas.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/landing.js"></script>
 </body>
 </html>
